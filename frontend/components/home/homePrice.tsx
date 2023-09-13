@@ -1,5 +1,6 @@
 import { RingProgress, Text, SimpleGrid, Paper, Center, Group } from '@mantine/core';
 import { IconArrowUpRight, IconArrowDownRight } from '@tabler/icons-react';
+import MockLoading from '../ui/mockLoading';
 
 interface StatsRingProps {
   data: {
@@ -20,30 +21,32 @@ function HomePrice({ data }: StatsRingProps) {
   const stats = data.map((stat) => {
     const Icon = icons[stat.icon];
     return (
-      <Paper withBorder radius="md" p="xs" key={stat.label} style={{width: 110}}>
-        <Group>
-          <RingProgress
-            size={80}
-            roundCaps
-            thickness={8}
-            sections={[{ value: stat.progress, color: stat.color }]}
-            label={
-              <Center>
-                <Icon size="1.4rem" stroke={1.5} />
-              </Center>
-            }
-          />
+      <MockLoading>
+        <Paper withBorder radius="md" p="xs" key={stat.label} style={{ width: 110 }}>
+          <Group>
+            <RingProgress
+              size={80}
+              roundCaps
+              thickness={8}
+              sections={[{ value: stat.progress, color: stat.color }]}
+              label={
+                <Center>
+                  <Icon size="1.4rem" stroke={1.5} />
+                </Center>
+              }
+            />
 
-          <div>
-            <Text color="dimmed" size="xs" transform="uppercase" weight={700}>
-              {stat.label}
-            </Text>
-            <Text weight={700} size="sm">
-              {stat.stats}
-            </Text>
-          </div>
-        </Group>
-      </Paper>
+            <div>
+              <Text color="dimmed" size="xs" transform="uppercase" weight={700}>
+                {stat.label}
+              </Text>
+              <Text weight={700} size="sm">
+                {stat.stats}
+              </Text>
+            </div>
+          </Group>
+        </Paper>
+      </MockLoading>
     );
   });
 

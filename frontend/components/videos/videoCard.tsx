@@ -3,6 +3,7 @@ import VidoeStarRating from './videoStarRating';
 import VidoeTimeing from './videoTimeing';
 import Link from 'next/link';
 import { API_URL } from '@/config/api';
+import { IconSparkles } from '@tabler/icons-react';
 
 const useStyles = createStyles((theme) => ({
     card: {
@@ -48,7 +49,6 @@ interface VidoeCardProps {
 
 const VidoeCard: React.FC<VidoeCardProps> = props => {
     const { classes, theme } = useStyles();
-
     return (
         <Card withBorder padding='lg' className={classes.card} radius='md'>
             <Card.Section>
@@ -56,6 +56,7 @@ const VidoeCard: React.FC<VidoeCardProps> = props => {
                     src={`${API_URL}/${props.thumbnail}`}
                     alt=''
                     height={props.product ? 300 : 130}
+                    fit='fill'
                 />
             </Card.Section>
 
@@ -76,9 +77,10 @@ const VidoeCard: React.FC<VidoeCardProps> = props => {
             </Link>
             {props.tags ? (
                 <Box mt='lg'>
-                    <Tooltip label="Suggested by AI">
-                        <Badge variant="gradient" gradient={{ from: 'orange', to: 'red' }}>{props.tags}</Badge>
-                    </Tooltip>
+                    <Text c='dimmed' fs='italic'>
+                        <IconSparkles size={14} style={{ marginRight: '5px' }} />
+                        AI suggests that this is a '{props.tags}'
+                    </Text>
                 </Box>
             ) : null}
             <Group style={{ width: '100%' }} mt='sm'>
