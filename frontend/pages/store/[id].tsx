@@ -16,16 +16,14 @@ import PurchaseVideo from '@/components/videos/purchaseVideo';
 import Review from '@/components/review';
 
 const useStyles = createStyles((theme) => ({
-    videoDetail: {
-        display: 'flex'
-    }
+    videoDetail: { display: 'flex' }
 }));
 
-const VideoDetailPage: React.FC<any> = props => {
+const ProductDetailPage: React.FC<any> = props => {
     const authCtx = useContext(authContext);
     const router = useRouter()
-    const { data, error } = useQuery(['video', router.query.id], async () => {
-        const response = await fetch(`${API_URL}/videos/${router.query.id}`, {
+    const { data, error } = useQuery(['store', router.query.id], async () => {
+        const response = await fetch(`${API_URL}/store/${router.query.id}`, {
             headers: {
                 'Authorization': 'Bearer ' + authCtx.authData.token
             }
@@ -42,35 +40,21 @@ const VideoDetailPage: React.FC<any> = props => {
         content = (
             <>
                 <Head>
-                    <title>{data.title}</title>
+                    <title>{data.productName}</title>
                 </Head>
                 <div style={{ marginTop: 10 }}></div>
-                {data.video ? (
-                    <Player
-                        playsInline
-                        poster={`${API_URL}/${data.thumbnail}`}
-                        src={`${API_URL}/${data.video}`}
-                        autoPlay
-                    />
-                ) : (
-                    <PurchaseVideo
-                        thumbnail={data.thumbnail}
-                        points={data.cost}
-                        user={data.user}
-                        videoId={data.id}
-                    />
-                )}
-                <h1>{data.title}</h1>
+                <img src={`${API_URL}/${data.thumbnail}`} width={200} />
+                <h1>{data.productName}</h1>
                 <div className={classes.videoDetail}>
                     <Group mr='md'>
-                        <Avatar src='/images/profile-picture.png' radius='xl' />
+                        <Avatar src='/images/profile-picture.png' radius="xl" />
                         <div style={{ flex: 1 }}>
                             <Link href={`/profile/${data.user.id}`}>
-                                <Text size='sm' weight={500}>
+                                <Text size="sm" weight={500}>
                                     {data.user.username}
                                 </Text>
                             </Link>
-                            <Text color='dimmed' size='xs'>
+                            <Text color="dimmed" size="xs">
                                 {data.user.followersCount} followers
                             </Text>
                         </div>
@@ -108,28 +92,27 @@ const VideoDetailPage: React.FC<any> = props => {
                                     });
                                     queryClient.invalidateQueries({ queryKey: ['profile'] });
                                     queryClient.invalidateQueries({ queryKey: ['video', router.query.id] });
-                                }}>Follow</AppButton>
+                                }}>
+                                    Follow
+                                </AppButton>
                             )}
                         </>
                     )}
                     <div style={{ flex: 1 }}></div>
                     <VidoeStarRating rating={`${data.review.avgRating}`} />
                 </div>
-                <div style={{ marginTop: 16 }}>
-                    <Text c='dimmed'>{moment(data.createdAt).format('MMM Do YY')}</Text>
-                    <Text>{data.description}</Text>
-                </div>
-                <Review payload={data.id} />
+                <h1>{data.productName}</h1>
+                <Review payload={`${router.query.id}`} />
             </>
         )
     }
 
 
     return (
-        <Layout activeNavigation=''>
+        <Layout activeNavigation='store'>
             {content}
         </Layout>
     );
 }
 
-export default VideoDetailPage;
+export default ProductDetailPage;

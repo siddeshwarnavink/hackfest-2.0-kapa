@@ -15,7 +15,7 @@ export class ReviewService {
 
   async getReview(userId: string, payload: string, minimal: boolean = false) {
     const userReview = await this.reivewsRepository.findOne({
-      where: { authorId: userId },
+      where: { authorId: userId, payload },
       include: [{
         attributes: ['id', 'username'],
         model: User,
@@ -34,7 +34,7 @@ export class ReviewService {
     return {
       userReview,
       reviews,
-      avgRating
+      avgRating: avgRating || 0
     }
   }
 

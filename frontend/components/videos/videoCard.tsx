@@ -59,7 +59,7 @@ const VidoeCard: React.FC<VidoeCardProps> = props => {
                 />
             </Card.Section>
 
-            <Link href={props.product ? '/store/' : '/videos/' + props.videoId} style={{ textDecoration: 'none', color: 'unset' }}>
+            <Link href={(props.product ? '/store/' : '/videos/') + props.videoId} style={{ textDecoration: 'none', color: 'unset' }}>
                 <Group mt='xl'>
                     <div>
                         <Avatar />
