@@ -1,0 +1,29 @@
+@font-face {
+    font-family: 'Nunito Sans';
+    src: url('/fonts/NunitoSans.ttf');
+}
+
+
+body {
+    font-family: 'Nunito Sans' !important;
+    background-color: #171717 !important;
+}
+
+/* Chat */
+.rce-input {
+    color: white;
+}
+
+.rce-container-input {
+    background-color: transparent;
+}
+
+.rce-mbox,
+.rce-citem {
+    background-color: #373A40;
+}
+
+.rce-mbox-right-notch,
+.rce-mbox-left-notch {
+    fill: #373A40;
+}
