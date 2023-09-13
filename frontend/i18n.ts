@@ -10,7 +10,8 @@ i18n.use(initReactI18next).init({
                 neighbourhood: 'Neighbourhood',
                 store: 'Store',
                 // home page
-                settings: 'Settings'
+                settings: 'Settings',
+                selectLanguage: 'Select a language'
             },
         },
         ta: {
@@ -20,7 +21,8 @@ i18n.use(initReactI18next).init({
                 neighbourhood: 'அக்கம்',
                 store: 'ஸ்டோர்',
                 // home page
-                settings: 'அமைப்புகள்'
+                settings: 'அமைப்புகள்',
+                selectLanguage: 'மொழியை மாற்றவும் (Language)'
             },
         },
     },
