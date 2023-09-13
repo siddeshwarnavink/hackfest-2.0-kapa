@@ -1,4 +1,4 @@
-import { createStyles, Card, Image, Text, Group, rem, Avatar, Badge } from '@mantine/core';
+import { createStyles, Card, Image, Text, Group, rem, Avatar, Badge, Box, Tooltip } from '@mantine/core';
 import VidoeStarRating from './videoStarRating';
 import VidoeTimeing from './videoTimeing';
 import Link from 'next/link';
@@ -42,6 +42,8 @@ interface VidoeCardProps {
     username: string;
     userId: string;
     videoId: string;
+    product?: boolean;
+    tags?: string;
 }
 
 const VidoeCard: React.FC<VidoeCardProps> = props => {
@@ -53,11 +55,11 @@ const VidoeCard: React.FC<VidoeCardProps> = props => {
                 <Image
                     src={`${API_URL}/${props.thumbnail}`}
                     alt=''
-                    height={130}
+                    height={props.product ? 300 : 130}
                 />
             </Card.Section>
 
-            <Link href={'/videos/' + props.videoId} style={{ textDecoration: 'none', color: 'unset' }}>
+            <Link href={props.product ? '/store/' : '/videos/' + props.videoId} style={{ textDecoration: 'none', color: 'unset' }}>
                 <Group mt='xl'>
                     <div>
                         <Avatar />
@@ -72,6 +74,13 @@ const VidoeCard: React.FC<VidoeCardProps> = props => {
                     </div>
                 </Group>
             </Link>
+            {props.tags ? (
+                <Box mt='lg'>
+                    <Tooltip label="Suggested by AI">
+                        <Badge variant="gradient" gradient={{ from: 'orange', to: 'red' }}>{props.tags}</Badge>
+                    </Tooltip>
+                </Box>
+            ) : null}
             <Group style={{ width: '100%' }} mt='sm'>
                 <Group>
                     <VidoeStarRating rating='2.3' />
@@ -89,5 +98,9 @@ const VidoeCard: React.FC<VidoeCardProps> = props => {
         </Card>
     );
 }
+
+VidoeCard.defaultProps = {
+    product: false,
+};
 
 export default VidoeCard;

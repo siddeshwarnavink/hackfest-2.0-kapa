@@ -11,7 +11,7 @@ import authContext from '@/context/authContext';
 const Storepage: React.FC<{}> = () => {
     const authCtx = useContext(authContext);
     const { data, error, isLoading } = useQuery(['store'], async () => {
-        const response = await fetch(`${API_URL}/videos`, {
+        const response = await fetch(`${API_URL}/store`, {
             headers: {
                 'Authorization': 'Bearer ' + authCtx.authData.token
             }
@@ -31,12 +31,14 @@ const Storepage: React.FC<{}> = () => {
                         return (
                             <VidoeCard
                                 key={video.id}
-                                title={video.title}
+                                product
+                                title={video.productName}
                                 thumbnail={video.thumbnail}
                                 cost={video.cost}
-                                username={video.user.username}
-                                userId={video.user.id}
+                                username={video.creator.username}
+                                userId={video.creator.id}
                                 videoId={video.id}
+                                tags={video.tags}
                             />
                         )
                     })}
