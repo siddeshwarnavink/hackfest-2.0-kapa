@@ -5,6 +5,7 @@ import { PointsModule } from './points/points.module';
 import { VideosModule } from './videos/videos.module';
 import { UsersModule } from './user/user.module';
 import { ReviewModule } from './review/review.module';
+import { StoreModule } from './store/store.module';
 
 @Module({
   imports: [
@@ -12,7 +13,8 @@ import { ReviewModule } from './review/review.module';
     PointsModule,
     VideosModule,
     UsersModule,
-    ReviewModule
+    ReviewModule,
+    StoreModule
   ],
   controllers: [],
   providers: [],
