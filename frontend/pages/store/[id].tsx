@@ -1,9 +1,9 @@
-import { useContext } from 'react';
+import { useContext, useState } from 'react';
 import { useQuery, useQueryClient } from '@tanstack/react-query';
 import { useRouter } from 'next/router';
 import Link from 'next/link';
 import { Player } from 'video-react';
-import { Avatar, Box, Button, Container, Group, Loader, SimpleGrid, Text, createStyles, Image } from '@mantine/core';
+import { Avatar, Box, Button, Container, Group, Loader, SimpleGrid, Text, createStyles, Image, Modal } from '@mantine/core';
 import Head from 'next/head';
 
 import Layout from '@/components/layout';
@@ -15,8 +15,9 @@ import moment from 'moment';
 import PurchaseVideo from '@/components/videos/purchaseVideo';
 import Review from '@/components/review';
 import MockLoading from '@/components/ui/mockLoading';
-import { IconPlus, IconShoppingBag } from '@tabler/icons-react';
+import { IconLock, IconPlus, IconShoppingBag } from '@tabler/icons-react';
 import VidoeCard from '@/components/videos/videoCard';
+import TransferWallet from '@/components/wallet/transferWallet';
 
 const useStyles = createStyles((theme) => ({
     videoDetail: { display: 'flex' }
@@ -36,6 +37,7 @@ const ProductDetailPage: React.FC<any> = props => {
     });
     const { classes, theme } = useStyles();
     const queryClient = useQueryClient();
+    const [showPurchase, setShowPurchase] = useState(false);
 
     let content = <Loader />;
     if (error) content = <div>Error loading data</div>;
@@ -45,6 +47,31 @@ const ProductDetailPage: React.FC<any> = props => {
                 <Head>
                     <title>{data.productName}</title>
                 </Head>
+                <Modal
+                    opened={showPurchase}
+                    onClose={() => setShowPurchase(false)}
+                    title={(
+                        <>
+                            <Text fz='md' fw='bold'>Transfer</Text>
+                            <Text c='dimmed'>
+                                <IconLock size={14} />{' '}
+                                Encrypted with blockchain
+                            </Text>
+                        </>
+                    )}
+                    overlayProps={{
+                        color: theme.colors.dark[9],
+                        opacity: 0.55,
+                        blur: 3,
+                    }}
+                >
+                    <TransferWallet
+                        onClose={() => {
+                            setShowPurchase(false);
+                        }}
+                        to={data.creator.email}
+                    />
+                </Modal>
                 <div style={{ marginTop: 10 }}></div>
                 <SimpleGrid cols={3}>
                     <Image src={`${API_URL}/${data.thumbnail}`} radius='md' />
@@ -61,7 +88,7 @@ const ProductDetailPage: React.FC<any> = props => {
                         </div>
                         <p>{data.productDescription}</p>
                         <Box mt='lg'>
-                            <AppButton leftIcon={<IconShoppingBag />}>Buy now</AppButton>
+                            <AppButton onClick={() => setShowPurchase(true)} leftIcon={<IconShoppingBag />}>Buy now</AppButton>
                             <Button leftIcon={<IconPlus />} ml='sm' variant='outline'>Add to wishlist</Button>
                         </Box>
                     </div>
