@@ -261,9 +261,11 @@ const Layout: React.FC<ILayoutProps> = props => {
                                     Neighbourhood
                                 </Tabs.Tab>
                             </Link>
-                            <Tabs.Tab value='store' icon={<IconBuildingStore size={18} color={props.activeNavigation === 'store' ? theme.colors.blue[5] : theme.colors.gray[5]} />}>
-                                Store
-                            </Tabs.Tab>
+                            <Link href='/store' style={{ textDecoration: 'none' }}>
+                                <Tabs.Tab value='store' icon={<IconBuildingStore size={18} color={props.activeNavigation === 'store' ? theme.colors.blue[5] : theme.colors.gray[5]} />}>
+                                    Store
+                                </Tabs.Tab>
+                            </Link>
                         </Tabs.List>
                     </Tabs>
                 </Container>
