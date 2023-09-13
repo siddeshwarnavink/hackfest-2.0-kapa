@@ -18,15 +18,25 @@ class LocationMarker {
   createMarker() {
 
     // Create the marker and set the custom icon
-    this.marker = L.marker(this.coordinates).addTo(this.map);
+    // this.marker = L.marker(this.coordinates).addTo(this.map);
+    this.marker = L.marker(this.coordinates, {
+      icon: L.icon({
+        // iconUrl: process.env.NEXT_PUBLIC_LEAFLET_MAP_ICON, // Use the environment variable
+        iconUrl: '/marker-icon.png',
+        iconSize: [25, 41],
+        iconAnchor: [12, 41],
+        popupAnchor: [1, -34],
+      }),
+    }).addTo(this.map);
 
     // Bind a popup to the marker
     this.marker.bindPopup(`This is the ${this.name} marker.`);
 
     let label = L.divIcon({ className: 'custom-label', html: this.name });
-    
+
     L.marker([this.coordinates[0] - 0.001, this.coordinates[1]], { icon: label }).addTo(this.map);
     // Handle marker click to zoom to the location
+
     this.marker.on('click', () => {
       this.map.setView(this.coordinates, 13, { animate: true, duration: 3 }); // Adjust the zoom level and options as needed
     });
@@ -49,17 +59,18 @@ function Map() {
       attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
     }).addTo(map);
 
-    const locationName = new LocationMarker("Vadapalani", [13.0501, 80.2110], map);
-    const locationName2 = new LocationMarker("Thiruvallur", [13.2544, 80.0088], map);
+    const locationName = new LocationMarker("SRM Vadapalani", [13.0501, 80.2110], map);
+    const locationName2 = new LocationMarker("Koyambedu", [13.09, 80.0], map);
+    const loc3 = new LocationMarker("Bay Of Bengal", [13.01, 80.5], map);
 
     locationName.createMarker();
     locationName2.createMarker();
-    
-
+    loc3.createMarker();
 
     // Cleanup when the component unmounts
     return () => {
       map.remove(); // Remove the map when the component unmounts
+      loc3.removeMarker();
       locationName.removeMarker();
       locationName2.removeMarker();
     };

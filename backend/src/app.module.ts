@@ -6,6 +6,7 @@ import { VideosModule } from './videos/videos.module';
 import { UsersModule } from './user/user.module';
 import { ReviewModule } from './review/review.module';
 import { StoreModule } from './store/store.module';
+import { CommunityModule } from './community/community.module';
 
 @Module({
   imports: [
@@ -14,7 +15,8 @@ import { StoreModule } from './store/store.module';
     VideosModule,
     UsersModule,
     ReviewModule,
-    StoreModule
+    StoreModule,
+    CommunityModule
   ],
   controllers: [],
   providers: [],

@@ -6,6 +6,8 @@ import { VideoPurchase } from 'src/videos/video-purchase.entity';
 import { UserFollower } from 'src/user/userFollower.entity';
 import { Review } from 'src/review/review.entity';
 import { Store } from 'src/store/store.entity';
+import { Community } from 'src/community/community.entity';
+import { UserCommunity } from 'src/community/userCommunity.entity';
 
 export const databaseProvider = [
   {
@@ -24,7 +26,9 @@ export const databaseProvider = [
         VideoPurchase,
         UserFollower,
         Review,
-        Store
+        Store,
+        Community,
+        UserCommunity
       ]);
       await sequelize.sync();
       return sequelize;

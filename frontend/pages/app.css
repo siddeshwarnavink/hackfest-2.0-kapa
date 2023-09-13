@@ -48,6 +48,7 @@ body {
     background-color: transparent;
     border: none;
     padding: 0;
+    color: black !important;
   }
   
   /* Adjust the map container height to accommodate the label */
