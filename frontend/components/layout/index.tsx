@@ -35,6 +35,7 @@ import Link from 'next/link';
 import authContext from '@/context/authContext';
 import { useQuery } from '@tanstack/react-query';
 import { fetchProfile } from '@/services/auth';
+import { SpotlightAction, SpotlightProvider, spotlight } from '@mantine/spotlight';
 
 const useStyles = createStyles((theme) => ({
     header: {
@@ -150,6 +151,20 @@ const Layout: React.FC<ILayoutProps> = props => {
         window.location.replace('/auth');
     }
 
+    const actions: SpotlightAction[] = [
+        {
+            title: 'SRM Vadapalani',
+            onTrigger: () => console.log('Home'),
+            icon: <IconAB2 size="1.2rem" />,
+        },
+        {
+            title: 'Tiruvalur',
+            onTrigger: () => console.log('Home'),
+            icon: <IconAB2 size="1.2rem" />,
+        },
+        
+    ];
+
     return (
         <>
             <div className={classes.header}>
@@ -167,9 +182,17 @@ const Layout: React.FC<ILayoutProps> = props => {
                             data={[]}
                         />
                         <Group>
-                            <UnstyledButton color='dark'>
-                                <IconSwitchVertical size={20} />
-                            </UnstyledButton>
+                            <SpotlightProvider
+                                actions={actions}
+                                searchIcon={<IconSearch size="1.2rem" />}
+                                searchPlaceholder="Search community..."
+                                shortcut="mod + shift + 1"
+                                nothingFoundMessage="Nothing found..."
+                            >
+                                <UnstyledButton color='dark' onClick={spotlight.open}>
+                                    <IconSwitchVertical size={20} />
+                                </UnstyledButton>
+                            </SpotlightProvider>
                             <Link href='/videos/upload'>
                                 <UnstyledButton color='dark'>
                                     <IconCloudUpload size={20} />
