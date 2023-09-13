@@ -55,7 +55,7 @@ export default function App({ Component, pageProps, ...props }: AppProps) {
           ) : <LoadingOverlay visible={auth.loading} overlayBlur={100} />}
         </authContext.Provider>
       </MantineProvider>
-      <ReactQueryDevtools initialIsOpen={false} />
+      {/* <ReactQueryDevtools initialIsOpen={false} /> */}
     </QueryClientProvider>
   );
 }

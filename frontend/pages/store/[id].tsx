@@ -3,7 +3,7 @@ import { useQuery, useQueryClient } from '@tanstack/react-query';
 import { useRouter } from 'next/router';
 import Link from 'next/link';
 import { Player } from 'video-react';
-import { Avatar, Button, Container, Group, Loader, Text, createStyles } from '@mantine/core';
+import { Avatar, Box, Button, Container, Group, Loader, SimpleGrid, Text, createStyles, Image } from '@mantine/core';
 import Head from 'next/head';
 
 import Layout from '@/components/layout';
@@ -14,6 +14,9 @@ import VidoeStarRating from '@/components/videos/videoStarRating';
 import moment from 'moment';
 import PurchaseVideo from '@/components/videos/purchaseVideo';
 import Review from '@/components/review';
+import MockLoading from '@/components/ui/mockLoading';
+import { IconPlus, IconShoppingBag } from '@tabler/icons-react';
+import VidoeCard from '@/components/videos/videoCard';
 
 const useStyles = createStyles((theme) => ({
     videoDetail: { display: 'flex' }
@@ -31,78 +34,63 @@ const ProductDetailPage: React.FC<any> = props => {
         const data = await response.json();
         return data;
     });
-    const { classes } = useStyles();
+    const { classes, theme } = useStyles();
     const queryClient = useQueryClient();
 
     let content = <Loader />;
     if (error) content = <div>Error loading data</div>;
     else if (data) {
         content = (
-            <Container>
+            <Container size='xl'>
                 <Head>
                     <title>{data.productName}</title>
                 </Head>
                 <div style={{ marginTop: 10 }}></div>
-                <img src={`${API_URL}/${data.thumbnail}`} width={200} />
-                <h1>{data.productName}</h1>
-                <div className={classes.videoDetail}>
-                    <Group mr='md'>
-                        <Avatar src='/images/profile-picture.png' radius="xl" />
-                        <div style={{ flex: 1 }}>
-                            <Link href={`/profile/${data.user.id}`}>
-                                <Text size="sm" weight={500}>
-                                    {data.user.username}
-                                </Text>
-                            </Link>
-                            <Text color="dimmed" size="xs">
-                                {data.user.followersCount} followers
-                            </Text>
+                <SimpleGrid cols={3}>
+                    <Image src={`${API_URL}/${data.thumbnail}`} radius='md' />
+                    <div style={{ marginLeft: 15, marginTop: 10 }}>
+                        <h1 style={{ margin: 0, padding: 0 }}>{data.productName}</h1>
+                        <div style={{ display: 'flex' }}>
+                            <VidoeStarRating rating={`${data.review.avgRating}`} />
+                            <Text ml='sm' c='dimmed'>12 Reviews</Text>
                         </div>
-                    </Group>
-                    {data.user.id === authCtx.authData.profile.id ? (
-                        <Link href={`/videos/${data.id}/edit`}>
-                            <AppButton>Edit video</AppButton>
-                        </Link>
-                    ) : (
-                        <>
-                            {data.user.following ? (
-                                <Button
-                                    variant='outline'
-                                    color='red'
-                                    onClick={async () => {
-                                        await fetch(`${API_URL}/user/${data.user.id}/unfollow`, {
-                                            method: 'POST',
-                                            headers: {
-                                                'Authorization': 'Bearer ' + JSON.parse(localStorage.getItem('auth')).token
-                                            }
-                                        });
-                                        queryClient.invalidateQueries({ queryKey: ['profile'] });
-                                        queryClient.invalidateQueries({ queryKey: ['video', router.query.id] });
-                                    }}
-                                >
-                                    Unfollow
-                                </Button>
-                            ) : (
-                                <AppButton onClick={async () => {
-                                    await fetch(`${API_URL}/user/${data.user.id}/follow`, {
-                                        method: 'POST',
-                                        headers: {
-                                            'Authorization': 'Bearer ' + JSON.parse(localStorage.getItem('auth')).token
-                                        }
-                                    });
-                                    queryClient.invalidateQueries({ queryKey: ['profile'] });
-                                    queryClient.invalidateQueries({ queryKey: ['video', router.query.id] });
-                                }}>
-                                    Follow
-                                </AppButton>
-                            )}
-                        </>
-                    )}
-                    <div style={{ flex: 1 }}></div>
-                    <VidoeStarRating rating={`${data.review.avgRating}`} />
-                </div>
-                <h1>{data.productName}</h1>
-                <Review payload={`${router.query.id}`} />
+                        <Text color={theme.colors.blue[5]} mt='md'>Special price</Text>
+                        <div style={{ display: 'flex', alignItems: 'center' }}>
+                            <img src="/images/Coin.svg" width={30} />
+                            <Text fw='bold' size={20}>{data.cost}</Text>
+                        </div>
+                        <p>{data.productDescription}</p>
+                        <Box mt='lg'>
+                            <AppButton leftIcon={<IconShoppingBag />}>Buy now</AppButton>
+                            <Button leftIcon={<IconPlus />} ml='sm' variant='outline'>Add to wishlist</Button>
+                        </Box>
+                    </div>
+
+                </SimpleGrid>
+                <MockLoading>
+                    <Review payload={`${router.query.id}`} />
+                </MockLoading>
+                <MockLoading>
+                    <h3>Also check out</h3>
+                    <SimpleGrid cols={5} mt='lg'>
+                        {data.alsoCheckout.map(video => {
+                            return (
+                                <VidoeCard
+                                    key={video.id}
+                                    product
+                                    minimal
+                                    title={video.productName}
+                                    thumbnail={video.thumbnail}
+                                    cost={video.cost}
+                                    username={video.creator.username}
+                                    userId={video.creator.id}
+                                    videoId={video.id}
+                                    tags={video.tags}
+                                />
+                            )
+                        })}
+                    </SimpleGrid>
+                </MockLoading>
             </Container>
         )
     }

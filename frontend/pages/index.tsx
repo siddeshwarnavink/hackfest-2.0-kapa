@@ -10,6 +10,7 @@ import authContext from '@/context/authContext';
 import LocalTalks from '@/components/home/localTalks';
 import HomeNav from '@/components/home/homeNav';
 import HomePrice from '@/components/home/homePrice';
+import MockLoading from '@/components/ui/mockLoading';
 
 const Homepage: React.FC<{}> = () => {
     const authCtx = useContext(authContext);
@@ -37,23 +38,27 @@ const Homepage: React.FC<{}> = () => {
                     <Grid.Col span={8}>
                         <Box>
                             <h2>Local talks</h2>
-                            <LocalTalks />
+                            <MockLoading>
+                                <LocalTalks />
+                            </MockLoading>
                             <h1>Videos  </h1>
-                            <SimpleGrid cols={3}>
-                                {data.map(video => {
-                                    return (
-                                        <VidoeCard
-                                            key={video.id}
-                                            title={video.title}
-                                            thumbnail={video.thumbnail}
-                                            cost={video.cost}
-                                            username={video.user.username}
-                                            userId={video.user.id}
-                                            videoId={video.id}
-                                        />
-                                    )
-                                })}
-                            </SimpleGrid>
+                            <MockLoading>
+                                <SimpleGrid cols={3}>
+                                    {data.map(video => {
+                                        return (
+                                            <VidoeCard
+                                                key={video.id}
+                                                title={video.title}
+                                                thumbnail={video.thumbnail}
+                                                cost={video.cost}
+                                                username={video.user.username}
+                                                userId={video.user.id}
+                                                videoId={video.id}
+                                            />
+                                        )
+                                    })}
+                                </SimpleGrid>
+                            </MockLoading>
                         </Box>
                     </Grid.Col>
                     <Grid.Col span={2}>

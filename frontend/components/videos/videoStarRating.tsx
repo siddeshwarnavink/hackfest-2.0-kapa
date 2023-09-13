@@ -19,9 +19,9 @@ const VidoeStarRating: React.FC<VidoeStarRatingProps> = props => {
     const { classes, theme } = useStyles();
     return (
         <div className={classes.rating}>
-            <IconStar stroke='.2em' width={15} color={theme.colors.blue[5]} />
+            <IconStar stroke='.2em' width={15} color={theme.colors.blue[5]} style={{ marginRight: 5 }} />
             <Text>{props.rating}</Text>
-            <Text c='dimmed'>/3</Text>
+            <Text c='dimmed' size={12}>/3</Text>
         </div>
     );
 }

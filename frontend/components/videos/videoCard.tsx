@@ -44,6 +44,7 @@ interface VidoeCardProps {
     userId: string;
     videoId: string;
     product?: boolean;
+    minimal?: boolean;
     tags?: string;
 }
 
@@ -62,20 +63,24 @@ const VidoeCard: React.FC<VidoeCardProps> = props => {
 
             <Link href={(props.product ? '/store/' : '/videos/') + props.videoId} style={{ textDecoration: 'none', color: 'unset' }}>
                 <Group mt='xl'>
-                    <div>
-                        <Avatar />
-                    </div>
+                    {!props.minimal ? (
+                        <div>
+                            <Avatar />
+                        </div>
+                    ) : null}
                     <div className={classes.caption}>
                         <Text fw={700} className={classes.title}>
                             {props.title}
                         </Text>
-                        <Text c='dimmed' className={classes.subtitle}>
-                            By <Link href={`/profile/${props.userId}`}>{props.username}</Link>
-                        </Text>
+                        {!props.minimal ? (
+                            <Text c='dimmed' className={classes.subtitle}>
+                                By <Link href={`/profile/${props.userId}`}>{props.username}</Link>
+                            </Text>
+                        ) : null}
                     </div>
                 </Group>
             </Link>
-            {props.tags ? (
+            {props.tags && !props.minimal ? (
                 <Box mt='lg'>
                     <Text c='dimmed' fs='italic'>
                         <IconSparkles size={14} style={{ marginRight: '5px' }} />
@@ -103,6 +108,7 @@ const VidoeCard: React.FC<VidoeCardProps> = props => {
 
 VidoeCard.defaultProps = {
     product: false,
+    minimal: false
 };
 
 export default VidoeCard;
