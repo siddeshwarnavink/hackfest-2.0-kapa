@@ -1,6 +1,6 @@
 import { Carousel } from '@mantine/carousel';
 import { useMediaQuery } from '@mantine/hooks';
-import { createStyles, Paper, Text, Title, Button, useMantineTheme, rem } from '@mantine/core';
+import { createStyles, Paper, Text, Title, Button, useMantineTheme, rem, BackgroundImage } from '@mantine/core';
 
 const useStyles = createStyles((theme) => ({
   card: {
@@ -40,11 +40,11 @@ function Card({ image, title, category }: CardProps) {
   const { classes } = useStyles();
 
   return (
-    <Paper
-      shadow="md"
+    <BackgroundImage
+      src={image}
+      component={Paper}
       p="xl"
       radius="md"
-      sx={{ backgroundImage: `url(${image})` }}
       className={classes.card}
     >
       <div>
@@ -55,51 +55,34 @@ function Card({ image, title, category }: CardProps) {
           {title}
         </Title>
       </div>
-      <Button variant="white" color="blue">
+      <Button variant="white" color="blue" mt='sm'>
         Read article
       </Button>
-    </Paper>
+    </BackgroundImage>
   );
 }
 
 const data = [
   {
     image:
-      'https://images.unsplash.com/photo-1508193638397-1c4234db14d8?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=400&q=80',
-    title: 'Best forests to visit in North America',
-    category: 'Coding',
+      'https://images.unsplash.com/photo-1472220625704-91e1462799b2?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1740&q=80',
+    title: 'Get started with learn coding',
+    category: 'Learning',
   },
   {
     image:
-      'https://images.unsplash.com/photo-1559494007-9f5847c49d94?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=400&q=80',
-    title: 'Hawaii beaches review: better than you think',
-    category: 'beach',
+      'https://images.unsplash.com/photo-1605522561233-768ad7a8fabf?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1744&q=80',
+    title: 'How to make the perfect dish 101',
+    category: 'Cooking',
   },
   {
     image:
-      'https://images.unsplash.com/photo-1608481337062-4093bf3ed404?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=400&q=80',
-    title: 'Mountains at night: 12 best locations to enjoy the view',
-    category: 'nature',
-  },
-  {
-    image:
-      'https://images.unsplash.com/photo-1507272931001-fc06c17e4f43?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=400&q=80',
-    title: 'Aurora in Norway: when to visit for best experience',
-    category: 'nature',
-  },
-  {
-    image:
-      'https://images.unsplash.com/photo-1510798831971-661eb04b3739?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=400&q=80',
-    title: 'Best places to visit this winter',
-    category: 'tourism',
-  },
-  {
-    image:
-      'https://images.unsplash.com/photo-1582721478779-0ae163c05a60?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=400&q=80',
-    title: 'Active volcanos reviews: travel at your own risk',
-    category: 'nature',
+      'https://images.unsplash.com/photo-1549060279-7e168fcee0c2?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1740&q=80',
+    title: 'Get started with gym',
+    category: 'Workout & Fitness',
   },
 ];
+
 
 function LocalTalks() {
   const theme = useMantineTheme();
