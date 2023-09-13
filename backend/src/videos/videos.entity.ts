@@ -32,4 +32,7 @@ export class Video extends Model {
     creator: string;
     @BelongsTo(() => User, { as: 'user', foreignKey: 'creator' })
     user: User;
+
+    @Column
+    communityId: string;
 }

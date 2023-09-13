@@ -11,12 +11,16 @@ import LocalTalks from '@/components/home/localTalks';
 import HomeNav from '@/components/home/homeNav';
 import HomePrice from '@/components/home/homePrice';
 import MockLoading from '@/components/ui/mockLoading';
+import communityContext from '@/context/community';
 
 const Homepage: React.FC<{}> = () => {
     const authCtx = useContext(authContext);
-    const theme = useMantineTheme();
-    const { data, error, isLoading } = useQuery(['homeFeed'], async () => {
-        const response = await fetch(`${API_URL}/videos`, {
+    const communityCtx = useContext(communityContext);
+    const communityId = communityCtx.community === ''
+        ? 'dffc0b77-5247-11ee-ac55-ac1203516bd9'
+        : communityCtx.community;
+    const { data, error } = useQuery(['homeFeed', communityId], async () => {
+        const response = await fetch(`${API_URL}/videos?community=` + communityId, {
             headers: {
                 'Authorization': 'Bearer ' + authCtx.authData.token
             }

@@ -1,4 +1,4 @@
-import { Controller, Get, UseGuards, Request, Post, UseInterceptors, BadRequestException, UploadedFiles, Param, Req, Patch } from '@nestjs/common';
+import { Controller, Get, UseGuards, Request, Post, UseInterceptors, BadRequestException, UploadedFiles, Param, Req, Patch, Query } from '@nestjs/common';
 import { FileFieldsInterceptor } from '@nestjs/platform-express';
 
 import { JwtAuthGuard } from 'src/auth/guards/jwt-auth.guard';
@@ -13,8 +13,8 @@ export class VideosController {
 
   @UseGuards(JwtAuthGuard)
   @Get()
-  async getHomeFeed(@Request() req) {
-    return this.videosService.getHomeFeed();
+  async getHomeFeed(@Request() req, @Query('community') communityId) {
+    return this.videosService.getHomeFeed(communityId);
   }
 
   @UseGuards(JwtAuthGuard)

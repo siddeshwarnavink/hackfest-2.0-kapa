@@ -5,6 +5,7 @@ import { User } from 'src/auth/user.entity';
 import { VideoPurchase } from './video-purchase.entity';
 import { UserFollower } from 'src/user/userFollower.entity';
 import { ReviewService } from 'src/review/review.service';
+import { Sequelize } from 'sequelize-typescript';
 
 @Injectable()
 export class VideosService {
@@ -18,13 +19,16 @@ export class VideosService {
         private reviewService: ReviewService
     ) { }
 
-    public getHomeFeed() {
+    public getHomeFeed(communityId: string) {
         return this.videosRepository.findAll({
             attributes: ['id', 'title', 'thumbnail', 'cost', 'watchTime'],
             include: [{
                 attributes: ['id', 'username'],
                 model: User,
-            }]
+            }],
+            order: [
+                [Sequelize.literal(`(CASE WHEN communityId = '${communityId}' THEN 1 ELSE 0 END)`), 'DESC']
+            ]
         });
     }
 

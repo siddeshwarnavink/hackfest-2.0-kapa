@@ -5,12 +5,13 @@ import { UnstyledButton } from "@mantine/core";
 import { notifications } from '@mantine/notifications';
 import { SpotlightAction, SpotlightProvider, spotlight } from '@mantine/spotlight';
 import { IconAB2, IconSearch, IconSwitchVertical } from "@tabler/icons-react";
-import { useQuery } from "@tanstack/react-query";
+import { useQuery, useQueryClient } from "@tanstack/react-query";
 import { useContext } from "react";
 
 const SwitchCommunity: React.FC = () => {
     const authCtx = useContext(authContext);
     const communityCtx = useContext(communityContext);
+    const queryClient = useQueryClient();
     const { data, error, isLoading } = useQuery(['community'], async () => {
         const response = await fetch(`${API_URL}/community`, {
             headers: {
@@ -24,23 +25,30 @@ const SwitchCommunity: React.FC = () => {
                 title: 'Community',
                 message: `Currently on "${data[0].name}" community`,
             });
+            setTimeout(() => {
+                queryClient.invalidateQueries({ queryKey: ['homeFeed'] });
+            }, 500);
         }
         return data;
     });
 
     let content = <></>
 
+    const switchCommunity = (community: any) => {
+        queryClient.invalidateQueries({ queryKey: ['homeFeed', communityCtx.community] });
+        communityCtx.setCommunity(community.id);
+        console.log(`Switching to ${community.name} ${community.id}`);
+        notifications.show({
+            title: 'Community',
+            message: `Currently on "${community.name}" community`,
+        });
+    };
+
     if (!isLoading && !error) {
         const actions: SpotlightAction[] = data.map(community => {
             return {
                 title: community.name,
-                onTrigger: () => {
-                    communityCtx.setCommunity(community.id);
-                    notifications.show({
-                        title: 'Community',
-                        message: `Currently on "${community.name}" community`,
-                    });
-                },
+                onTrigger: () => switchCommunity(community),
                 icon: <IconAB2 size="1.2rem" />,
             };
         })
