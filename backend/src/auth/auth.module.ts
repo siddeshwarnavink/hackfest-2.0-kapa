@@ -10,6 +10,8 @@ import { LocalStrategy } from './strategies/local.strategy';
 import { usersProvider } from './user.provider';
 import { BlockchainModule } from '../blockchain/blockchain.module';
 import { videossProvider } from 'src/videos/videos.provider';
+import { userFollowerProvider } from 'src/user/userFollower.provider';
+import { storesProvider } from 'src/store/store.provider';
 
 @Module({
     imports: [
@@ -26,6 +28,8 @@ import { videossProvider } from 'src/videos/videos.provider';
     providers: [
       ...usersProvider,
       ...videossProvider,
+      ...userFollowerProvider,
+      ...storesProvider,
       AuthService,
       JwtStrategy,
       LocalStrategy

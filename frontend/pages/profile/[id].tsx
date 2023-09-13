@@ -6,7 +6,7 @@ import { useRouter } from 'next/router';
 
 
 import Layout from '@/components/layout';
-import { Box, Loader, Modal, SimpleGrid, Tabs } from '@mantine/core';
+import { Box, Container, Loader, Modal, SimpleGrid, Tabs } from '@mantine/core';
 import { fetchOtherProfile } from '@/services/auth';
 import VidoeCard from '@/components/videos/videoCard';
 import ProfileStats from '@/components/profile/profileStats';
@@ -223,7 +223,9 @@ const ProfilePage: React.FC<{}> = () => {
                 <title>Profile</title>
             </Head>
             <Layout activeNavigation=''>
-                {content}
+                <Container>
+                    {content}
+                </Container>
             </Layout>
         </>
     );

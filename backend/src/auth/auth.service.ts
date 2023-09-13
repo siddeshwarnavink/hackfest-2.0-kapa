@@ -5,6 +5,8 @@ import * as bcrypt from 'bcrypt';
 import { User } from './user.entity';
 import { BlockchainService } from '../blockchain/blockchain.service';
 import { Video } from 'src/videos/videos.entity';
+import { UserFollower } from 'src/user/userFollower.entity';
+import { Store } from 'src/store/store.entity';
 
 @Injectable()
 export class AuthService {
@@ -14,7 +16,11 @@ export class AuthService {
     @Inject('VIDEOS_REPOSITORY')
     private videosRepository: typeof Video,
     private jwtService: JwtService,
-    private blockchainService: BlockchainService
+    private blockchainService: BlockchainService,
+    @Inject('USERFOLLOWER_REPOSITORY')
+    private userFollowerRepository: typeof UserFollower,
+    @Inject('STORES_REPOSITORY')
+    private storesRepository: typeof Store,
   ) { }
 
   async validateUser(email: string, password: string): Promise<any> {
@@ -87,18 +93,19 @@ export class AuthService {
       where: { creator: user.id },
       limit: 4
     });
+    const followersCount = await this.userFollowerRepository.count({ where: { followingId: user.id } });
+    const productssCount = await this.storesRepository.count({ where: { creatorId: user.id } });
     return {
       profile: {
         id: user.id,
         points: await this.blockchainService.getPoints(user.ethereumAddress),
         username: user.username,
         email: user.email,
-
       },
       statistics: {
         videos: videoCount,
-        followers: 0,
-        products: 0
+        followers: followersCount,
+        products: productssCount
       },
       videos
     };
