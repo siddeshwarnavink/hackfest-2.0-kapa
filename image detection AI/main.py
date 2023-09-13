@@ -28,6 +28,3 @@ for i in range(5):  # Print the top 5 predictions
     class_name, description, probability = decoded_predictions[0][i]
     print(f"{i + 1}: {class_name} ({description}): {probability:.2f}")
 
-
-# # AIzaSyCbdx2OX4NRQMNOmECHLcSsi_jbJHW7jgU google api key
-# # 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 openai key
