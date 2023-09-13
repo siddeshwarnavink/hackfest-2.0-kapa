@@ -1,0 +1,38 @@
+{
+  "name": "frontend",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint"
+  },
+  "dependencies": {
+    "@emotion/react": "^11.11.1",
+    "@emotion/server": "^11.11.0",
+    "@mantine/core": "^6.0.20",
+    "@mantine/dropzone": "^6.0.20",
+    "@mantine/form": "^6.0.20",
+    "@mantine/hooks": "^6.0.20",
+    "@mantine/modals": "^6.0.20",
+    "@mantine/next": "^6.0.20",
+    "@mantine/notifications": "^6.0.20",
+    "@tabler/icons-react": "^2.33.0",
+    "@tanstack/react-query": "^4.35.0",
+    "@tanstack/react-query-devtools": "^4.35.0",
+    "@types/node": "20.5.9",
+    "@types/react": "18.2.21",
+    "@types/react-dom": "18.2.7",
+    "ethers": "^6.7.1",
+    "formik": "^2.4.4",
+    "moment": "^2.29.4",
+    "next": "13.4.19",
+    "react": "18.2.0",
+    "react-chat-elements": "^12.0.10",
+    "react-dom": "18.2.0",
+    "typescript": "5.2.2",
+    "video-react": "^0.16.0",
+    "yup": "^1.2.0"
+  }
+}
