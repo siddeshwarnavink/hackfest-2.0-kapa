@@ -1,6 +1,8 @@
 import { API_URL } from "@/config/api";
 import authContext from "@/context/authContext";
+import communityContext from "@/context/community";
 import { UnstyledButton } from "@mantine/core";
+import { notifications } from '@mantine/notifications';
 import { SpotlightAction, SpotlightProvider, spotlight } from '@mantine/spotlight';
 import { IconAB2, IconSearch, IconSwitchVertical } from "@tabler/icons-react";
 import { useQuery } from "@tanstack/react-query";
@@ -8,6 +10,7 @@ import { useContext } from "react";
 
 const SwitchCommunity: React.FC = () => {
     const authCtx = useContext(authContext);
+    const communityCtx = useContext(communityContext);
     const { data, error, isLoading } = useQuery(['community'], async () => {
         const response = await fetch(`${API_URL}/community`, {
             headers: {
@@ -15,6 +18,12 @@ const SwitchCommunity: React.FC = () => {
             }
         });
         const data = await response.json();
+        if (data.length > 0 && communityCtx.community !== data[0].id) {
+            communityCtx.setCommunity(data[0].id);
+            notifications.show({
+                message: `Currently on "${data[0].name}" community`,
+            });
+        }
         return data;
     });
 
@@ -24,7 +33,12 @@ const SwitchCommunity: React.FC = () => {
         const actions: SpotlightAction[] = data.map(community => {
             return {
                 title: community.name,
-                onTrigger: () => console.log('Home'),
+                onTrigger: () => {
+                    communityCtx.setCommunity(community.id);
+                    notifications.show({
+                        message: `Currently on "${community.name}" community`,
+                    });
+                },
                 icon: <IconAB2 size="1.2rem" />,
             };
         })
