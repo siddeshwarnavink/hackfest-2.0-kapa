@@ -36,6 +36,7 @@ import authContext from '@/context/authContext';
 import { useQuery } from '@tanstack/react-query';
 import { fetchProfile } from '@/services/auth';
 import { SpotlightAction, SpotlightProvider, spotlight } from '@mantine/spotlight';
+import { t } from 'i18next';
 
 const useStyles = createStyles((theme) => ({
     header: {
@@ -279,12 +280,12 @@ const Layout: React.FC<ILayoutProps> = props => {
                         <Tabs.List>
                             <Link href='/' style={{ textDecoration: 'none' }}>
                                 <Tabs.Tab value='home' icon={<IconHome2 size={18} color={props.activeNavigation === 'home' ? theme.colors.blue[5] : theme.colors.gray[5]} />}>
-                                    Home
+                                    {t('home')}
                                 </Tabs.Tab>
                             </Link>
                             <Link href='/community' style={{ textDecoration: 'none' }}>
                                 <Tabs.Tab value='community' icon={<IconAB2 size={18} color={props.activeNavigation === 'community' ? theme.colors.blue[5] : theme.colors.gray[5]} />}>
-                                    Community
+                                    {t('community')}
                                 </Tabs.Tab>
                             </Link>
                             {/* <Link href='/updates' style={{ textDecoration: 'none' }}>
@@ -294,12 +295,12 @@ const Layout: React.FC<ILayoutProps> = props => {
                             </Link> */}
                             <Link href='/neighbourhood' style={{ textDecoration: 'none' }}>
                                 <Tabs.Tab value='neighbourhood' icon={<IconMail size={18} color={props.activeNavigation === 'neighbourhood' ? theme.colors.blue[5] : theme.colors.gray[5]} />}>
-                                    Neighbourhood
+                                    {t('neighbourhood')}
                                 </Tabs.Tab>
                             </Link>
                             <Link href='/store' style={{ textDecoration: 'none' }}>
                                 <Tabs.Tab value='store' icon={<IconBuildingStore size={18} color={props.activeNavigation === 'store' ? theme.colors.blue[5] : theme.colors.gray[5]} />}>
-                                    Store
+                                    {t('store')}
                                 </Tabs.Tab>
                             </Link>
                         </Tabs.List>
