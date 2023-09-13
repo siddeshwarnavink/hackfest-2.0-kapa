@@ -23,11 +23,12 @@ import {
     IconUser,
     IconChevronDown,
     IconHome2,
-    IconAt,
     IconMail,
     IconBuildingStore,
     IconSearch,
     IconCloudUpload,
+    IconAB2,
+    IconSwitchVertical,
 } from '@tabler/icons-react';
 import Link from 'next/link';
 
@@ -131,7 +132,7 @@ const useStyles = createStyles((theme) => ({
 
 interface ILayoutProps {
     children: ReactNode;
-    activeNavigation?: '' | 'home' | 'updates' | 'neighbourhood' | 'store';
+    activeNavigation?: '' | 'home' | 'updates' | 'neighbourhood' | 'store' | 'community';
 };
 
 const Layout: React.FC<ILayoutProps> = props => {
@@ -166,6 +167,9 @@ const Layout: React.FC<ILayoutProps> = props => {
                             data={[]}
                         />
                         <Group>
+                            <UnstyledButton color='dark'>
+                                <IconSwitchVertical size={20} />
+                            </UnstyledButton>
                             <Link href='/videos/upload'>
                                 <UnstyledButton color='dark'>
                                     <IconCloudUpload size={20} />
@@ -253,11 +257,16 @@ const Layout: React.FC<ILayoutProps> = props => {
                                     Home
                                 </Tabs.Tab>
                             </Link>
-                            <Link href='/updates' style={{ textDecoration: 'none' }}>
+                            <Link href='/community' style={{ textDecoration: 'none' }}>
+                                <Tabs.Tab value='community' icon={<IconAB2 size={18} color={props.activeNavigation === 'community' ? theme.colors.blue[5] : theme.colors.gray[5]} />}>
+                                    Community
+                                </Tabs.Tab>
+                            </Link>
+                            {/* <Link href='/updates' style={{ textDecoration: 'none' }}>
                                 <Tabs.Tab value='updates' icon={<IconAt size={18} color={props.activeNavigation === 'updates' ? theme.colors.blue[5] : theme.colors.gray[5]} />}>
                                     Updates
                                 </Tabs.Tab>
-                            </Link>
+                            </Link> */}
                             <Link href='/neighbourhood' style={{ textDecoration: 'none' }}>
                                 <Tabs.Tab value='neighbourhood' icon={<IconMail size={18} color={props.activeNavigation === 'neighbourhood' ? theme.colors.blue[5] : theme.colors.gray[5]} />}>
                                     Neighbourhood
@@ -273,7 +282,7 @@ const Layout: React.FC<ILayoutProps> = props => {
                 </Container>
             </div>
             {/* <Container> */}
-                {props.children}
+            {props.children}
             {/* </Container> */}
         </>
     );
