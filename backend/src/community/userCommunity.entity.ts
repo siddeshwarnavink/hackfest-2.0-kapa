@@ -1,4 +1,4 @@
-import { Table, Column, Model, ForeignKey, DataType } from 'sequelize-typescript';
+import { Table, Column, Model, ForeignKey, DataType, BelongsTo } from 'sequelize-typescript';
 
 import { Community } from './community.entity';
 import { User } from 'src/auth/user.entity';
@@ -18,4 +18,6 @@ export class UserCommunity extends Model {
     primaryKey: true,
   })
   communityId: string;
+  @BelongsTo(() => Community, { as: 'community', foreignKey: 'communityId' })
+  community: Community;
 }

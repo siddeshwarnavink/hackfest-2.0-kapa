@@ -5,11 +5,12 @@ import { userCommunityProvider } from './userCommunity.provider';
 import { communityProvider } from './community.provider';
 import { CommunityService } from './community.service';
 import { usersProvider } from 'src/auth/user.provider';
+import { CommunityController } from './community.controller';
 @Module({
     imports: [
       DatabaseModule,
     ],
-    controllers: [],
+    controllers: [CommunityController],
     providers: [
       ...usersProvider,
       ...userCommunityProvider,
