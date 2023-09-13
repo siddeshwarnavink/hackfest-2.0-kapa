@@ -1,6 +1,8 @@
 import { Carousel } from '@mantine/carousel';
 import { useMediaQuery } from '@mantine/hooks';
 import { createStyles, Paper, Text, Title, Button, useMantineTheme, rem, BackgroundImage } from '@mantine/core';
+import { useContext } from 'react';
+import communityContext from '@/context/community';
 
 const useStyles = createStyles((theme) => ({
   card: {
@@ -48,7 +50,7 @@ function Card({ image, title, category }: CardProps) {
       className={classes.card}
       style={{ position: 'relative' }}
     >
-      <div style={{zIndex: 100}}>
+      <div style={{ zIndex: 100 }}>
         <Text className={classes.category} size="xs">
           {category}
         </Text>
@@ -64,31 +66,50 @@ function Card({ image, title, category }: CardProps) {
   );
 }
 
-const data = [
-  {
-    image:
-      'https://images.unsplash.com/photo-1472220625704-91e1462799b2?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1740&q=80',
-    title: 'Get started with learn coding',
-    category: 'Learning',
-  },
-  {
-    image:
-      'https://images.unsplash.com/photo-1605522561233-768ad7a8fabf?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1744&q=80',
-    title: 'How to make the perfect dish 101',
-    category: 'Cooking',
-  },
-  {
-    image:
-      'https://images.unsplash.com/photo-1549060279-7e168fcee0c2?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1740&q=80',
-    title: 'Get started with gym',
-    category: 'Workout & Fitness',
-  },
-];
-
-
 function LocalTalks() {
   const theme = useMantineTheme();
   const mobile = useMediaQuery(`(max-width: ${theme.breakpoints.sm})`);
+  const communityCtx = useContext(communityContext)
+  const data = communityCtx.community === 'dffc0b77-5247-11ee-ac55-ac1203516bd9' ? [
+    {
+      image:
+        'https://images.unsplash.com/photo-1549060279-7e168fcee0c2?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1740&q=80',
+      title: 'Get started with gym',
+      category: 'Koyambedu',
+    },
+    {
+      image:
+        'https://images.unsplash.com/photo-1605522561233-768ad7a8fabf?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1744&q=80',
+      title: 'How to make the perfect dish 101',
+      category: 'SRM Vadapalani',
+    },
+    {
+      image:
+        'https://images.unsplash.com/photo-1472220625704-91e1462799b2?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1740&q=80',
+      title: 'Get started with learn coding',
+      category: 'SRM Vadapalani',
+    },
+  ] : [
+    {
+      image:
+        'https://images.unsplash.com/photo-1605522561233-768ad7a8fabf?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1744&q=80',
+      title: 'How to make the perfect dish 101',
+      category: 'SRM Vadapalani',
+    },
+    {
+      image:
+        'https://images.unsplash.com/photo-1472220625704-91e1462799b2?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1740&q=80',
+      title: 'Get started with learn coding',
+      category: 'SRM Vadapalani',
+    },
+    {
+      image:
+        'https://images.unsplash.com/photo-1549060279-7e168fcee0c2?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1740&q=80',
+      title: 'Get started with gym',
+      category: 'Koyambedu',
+    },
+  ];
+
   const slides = data.map((item) => (
     <Carousel.Slide key={item.title}>
       <Card {...item} />

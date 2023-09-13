@@ -18,9 +18,10 @@ const SwitchCommunity: React.FC = () => {
             }
         });
         const data = await response.json();
-        if (data.length > 0 && communityCtx.community !== data[0].id) {
+        if (data.length > 0 && communityCtx.community === '') {
             communityCtx.setCommunity(data[0].id);
             notifications.show({
+                title: 'Community',
                 message: `Currently on "${data[0].name}" community`,
             });
         }
@@ -36,6 +37,7 @@ const SwitchCommunity: React.FC = () => {
                 onTrigger: () => {
                     communityCtx.setCommunity(community.id);
                     notifications.show({
+                        title: 'Community',
                         message: `Currently on "${community.name}" community`,
                     });
                 },
