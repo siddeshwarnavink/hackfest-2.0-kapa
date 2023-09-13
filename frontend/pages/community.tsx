@@ -1,9 +1,13 @@
+
 import Layout from "@/components/layout";
+import dynamic from "next/dynamic";
+const Map = dynamic(() => import("@/components/community/MapComponent"), { ssr: false });
+
 
 const CommunityPage: React.FC = () => {
     return (
         <Layout activeNavigation="community">
-            <h1>Community</h1>
+            <Map />
         </Layout>
     );
 }
