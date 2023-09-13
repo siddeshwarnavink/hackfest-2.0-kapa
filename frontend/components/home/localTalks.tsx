@@ -46,8 +46,9 @@ function Card({ image, title, category }: CardProps) {
       p="xl"
       radius="md"
       className={classes.card}
+      style={{ position: 'relative' }}
     >
-      <div>
+      <div style={{zIndex: 100}}>
         <Text className={classes.category} size="xs">
           {category}
         </Text>
@@ -55,6 +56,7 @@ function Card({ image, title, category }: CardProps) {
           {title}
         </Title>
       </div>
+      <div className="overlay"></div>
       <Button variant="white" color="blue" mt='sm'>
         Read article
       </Button>

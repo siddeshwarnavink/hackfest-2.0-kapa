@@ -162,7 +162,7 @@ const Layout: React.FC<ILayoutProps> = props => {
             onTrigger: () => console.log('Home'),
             icon: <IconAB2 size="1.2rem" />,
         },
-        
+
     ];
 
     return (
@@ -248,11 +248,13 @@ const Layout: React.FC<ILayoutProps> = props => {
                                     </Menu.Item>
 
                                     <Menu.Label>Settings</Menu.Label>
-                                    <Menu.Item
-                                        icon={<IconSettings size='0.9rem' stroke={1.5} />}
-                                    >
-                                        Settings
-                                    </Menu.Item>
+                                    <Link href='/settings' passHref style={{ textDecoration: 'none' }}>
+                                        <Menu.Item
+                                            icon={<IconSettings size='0.9rem' stroke={1.5} />}
+                                        >
+                                            Settings
+                                        </Menu.Item>
+                                    </Link>
                                     <Link href='/profile' passHref style={{ textDecoration: 'none' }}>
                                         <Menu.Item component='a' icon={<IconUser size='0.9rem' stroke={1.5} />}>
                                             My profile
