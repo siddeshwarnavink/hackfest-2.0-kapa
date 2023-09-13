@@ -21,6 +21,7 @@ const SwitchCommunity: React.FC = () => {
         const data = await response.json();
         if (data.length > 0 && communityCtx.community === '') {
             communityCtx.setCommunity(data[0].id);
+            communityCtx.setCommunityName(data[0].name);
             notifications.show({
                 title: 'Community',
                 message: `Currently on "${data[0].name}" community`,
@@ -37,6 +38,7 @@ const SwitchCommunity: React.FC = () => {
     const switchCommunity = (community: any) => {
         queryClient.invalidateQueries({ queryKey: ['homeFeed', communityCtx.community] });
         communityCtx.setCommunity(community.id);
+        communityCtx.setCommunityName(community.name);
         console.log(`Switching to ${community.name} ${community.id}`);
         notifications.show({
             title: 'Community',
@@ -48,6 +50,7 @@ const SwitchCommunity: React.FC = () => {
         const actions: SpotlightAction[] = data.map(community => {
             return {
                 title: community.name,
+                description: communityCtx.communityName === community.name ? 'Current active' : undefined,
                 onTrigger: () => switchCommunity(community),
                 icon: <IconAB2 size="1.2rem" />,
             };
@@ -65,6 +68,7 @@ const SwitchCommunity: React.FC = () => {
                 <UnstyledButton color='dark' onClick={spotlight.open}>
                     <IconSwitchVertical size={20} />
                 </UnstyledButton>
+                {communityCtx.communityName}
             </SpotlightProvider>
         );
     }

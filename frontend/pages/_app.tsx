@@ -19,12 +19,14 @@ const queryClient = new QueryClient();
 export default function App({ Component, pageProps, ...props }: AppProps) {
   const auth = useAuth();
   const [community, setCommunity] = useState<string>('');
+  const [communityName, setCommunityName] = useState<string>('');
+
   useEffect(() => {
     auth.init();
   }, []);
   return (
     <I18nextProvider i18n={i18n}>
-      <communityContext.Provider value={{ community, setCommunity }}>
+      <communityContext.Provider value={{ community, setCommunity, communityName, setCommunityName }}>
         <QueryClientProvider client={queryClient}>
           <MantineProvider
             withGlobalStyles
