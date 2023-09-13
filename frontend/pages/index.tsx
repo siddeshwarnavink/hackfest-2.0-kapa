@@ -1,5 +1,5 @@
 import React, { useContext } from 'react';
-import { Loader, SimpleGrid } from '@mantine/core';
+import { Box, Container, Grid, Loader, SimpleGrid, Skeleton, Stack, px, rem, useMantineTheme } from '@mantine/core';
 import Head from 'next/head';
 import { useQuery } from '@tanstack/react-query';
 
@@ -7,9 +7,13 @@ import Layout from '@/components/layout';
 import VidoeCard from '@/components/videos/videoCard';
 import { API_URL } from '@/config/api';
 import authContext from '@/context/authContext';
+import LocalTalks from '@/components/home/localTalks';
+import HomeNav from '@/components/home/homeNav';
+import HomePrice from '@/components/home/homePrice';
 
 const Homepage: React.FC<{}> = () => {
     const authCtx = useContext(authContext);
+    const theme = useMantineTheme();
     const { data, error, isLoading } = useQuery(['homeFeed'], async () => {
         const response = await fetch(`${API_URL}/videos`, {
             headers: {
@@ -24,24 +28,50 @@ const Homepage: React.FC<{}> = () => {
     if (error) content = <div>Error loading data</div>;
     else if (data) {
         content = (
-            <>
-                <h1>My feed</h1>
-                <SimpleGrid cols={3}>
-                    {data.map(video => {
-                        return (
-                            <VidoeCard
-                                key={video.id}
-                                title={video.title}
-                                thumbnail={video.thumbnail}
-                                cost={video.cost}
-                                username={video.user.username}
-                                userId={video.user.id}
-                                videoId={video.id}
-                            />
-                        )
-                    })}
-                </SimpleGrid>
-            </>
+            <Box mx='xl'>
+                <Grid>
+                    <Grid.Col span={2}>
+                        <div style={{ marginTop: 50 }}></div>
+                        <HomeNav />
+                    </Grid.Col>
+                    <Grid.Col span={8}>
+                        <Box>
+                            <h2>Local talks</h2>
+                            <LocalTalks />
+                            <h1>Videos  </h1>
+                            <SimpleGrid cols={3}>
+                                {data.map(video => {
+                                    return (
+                                        <VidoeCard
+                                            key={video.id}
+                                            title={video.title}
+                                            thumbnail={video.thumbnail}
+                                            cost={video.cost}
+                                            username={video.user.username}
+                                            userId={video.user.id}
+                                            videoId={video.id}
+                                        />
+                                    )
+                                })}
+                            </SimpleGrid>
+                        </Box>
+                    </Grid.Col>
+                    <Grid.Col span={2}>
+                        <div style={{ marginTop: 50 }}></div>
+                        <HomePrice
+                            data={[
+                                {
+                                    label: 'Price',
+                                    stats: '0.000006124 ETH',
+                                    progress: 100,
+                                    color: 'green',
+                                    icon: 'up'
+                                }
+                            ]}
+                        />
+                    </Grid.Col>
+                </Grid>
+            </Box>
         )
     }
 

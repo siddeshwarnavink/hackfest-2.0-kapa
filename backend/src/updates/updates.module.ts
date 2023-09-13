@@ -3,7 +3,7 @@ import { Module } from '@nestjs/common';
 import { DatabaseModule } from '../database/database.module';
 import { UpdatesController } from './updates.controller';
 import { usersProvider } from 'src/auth/user.provider';
-import { reviewsProvider } from './updates.provider';
+// import { reviewsProvider } from './updates.provider';
 import { UpdatesService } from './updates.service';
 
 @Module({
@@ -13,7 +13,7 @@ import { UpdatesService } from './updates.service';
     controllers: [UpdatesController],
     providers: [
         ...usersProvider,
-        ...reviewsProvider,
+        // ...reviewsProvider,
         UpdatesService
     ],
     exports: [

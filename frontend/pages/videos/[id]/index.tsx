@@ -3,7 +3,7 @@ import { useQuery, useQueryClient } from '@tanstack/react-query';
 import { useRouter } from 'next/router';
 import Link from 'next/link';
 import { Player } from 'video-react';
-import { Avatar, Button, Group, Loader, Text, createStyles } from '@mantine/core';
+import { Avatar, Button, Container, Group, Loader, Text, createStyles } from '@mantine/core';
 import Head from 'next/head';
 
 import Layout from '@/components/layout';
@@ -40,7 +40,7 @@ const VideoDetailPage: React.FC<any> = props => {
     if (error) content = <div>Error loading data</div>;
     else if (data) {
         content = (
-            <>
+            <Container>
                 <Head>
                     <title>{data.title}</title>
                 </Head>
@@ -120,7 +120,7 @@ const VideoDetailPage: React.FC<any> = props => {
                     <Text>{data.description}</Text>
                 </div>
                 <Review payload={data.id} />
-            </>
+            </Container>
         )
     }
 

@@ -272,9 +272,9 @@ const Layout: React.FC<ILayoutProps> = props => {
                     </Tabs>
                 </Container>
             </div>
-            <Container>
+            {/* <Container> */}
                 {props.children}
-            </Container>
+            {/* </Container> */}
         </>
     );
 }

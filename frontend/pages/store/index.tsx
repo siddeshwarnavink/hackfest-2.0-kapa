@@ -1,5 +1,5 @@
 import React, { useContext } from 'react';
-import { Loader, SimpleGrid } from '@mantine/core';
+import { Container, Loader, SimpleGrid } from '@mantine/core';
 import Head from 'next/head';
 import { useQuery } from '@tanstack/react-query';
 
@@ -24,7 +24,7 @@ const Storepage: React.FC<{}> = () => {
     if (error) content = <div>Error loading data</div>;
     else if (data) {
         content = (
-            <>
+            <Container>
                 <h1>Store</h1>
                 <SimpleGrid cols={3}>
                     {data.map(video => {
@@ -43,7 +43,7 @@ const Storepage: React.FC<{}> = () => {
                         )
                     })}
                 </SimpleGrid>
-            </>
+            </Container>
         )
     }
 

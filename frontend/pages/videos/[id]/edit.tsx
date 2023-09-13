@@ -1,6 +1,6 @@
 import { useContext } from 'react';
 import { useQuery } from '@tanstack/react-query';
-import { Button, FileInput, Input, Loader, TextInput, Textarea, rem } from '@mantine/core';
+import { Button, Container, FileInput, Input, Loader, TextInput, Textarea, rem } from '@mantine/core';
 import Head from 'next/head';
 import { useFormik } from 'formik';
 import { IconCheck, IconUpload } from '@tabler/icons-react';
@@ -164,7 +164,9 @@ const EidtVideoDetailPage: React.FC<any> = props => {
 
     return (
         <Layout activeNavigation=''>
-            {content}
+            <Container>
+                {content}
+            </Container>
         </Layout>
     );
 }
