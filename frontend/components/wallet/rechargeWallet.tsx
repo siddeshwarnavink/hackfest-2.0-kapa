@@ -6,7 +6,7 @@ import * as yup from 'yup';
 import authContext from '@/context/authContext';
 import { API_URL } from '@/config/api';
 import { notifications } from '@mantine/notifications';
-import { IconCheck } from '@tabler/icons-react';
+import { IconCheck, IconCurrencyEthereum, IconCurrencyRupee } from '@tabler/icons-react';
 import { useQueryClient } from '@tanstack/react-query';
 
 import AppButton from '../ui/button';
@@ -98,7 +98,8 @@ const RechargeWallet: React.FC<RechargeWalletProps> = ({ onClose }) => {
                 <RechargePaymentSummary amount={parseFloat(formik.values.amount)} />
                 : null}
 
-            <AppButton type='submit'>Pay</AppButton>
+            <AppButton type='submit' leftIcon={<IconCurrencyEthereum />}>Pay with MetaMask</AppButton> {' '}
+            <AppButton type='submit' leftIcon={<IconCurrencyRupee />}>Pay with Rupee</AppButton>
         </form>
     );
 }
