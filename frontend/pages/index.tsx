@@ -59,6 +59,7 @@ const Homepage: React.FC<{}> = () => {
                                                 username={video.user.username}
                                                 userId={video.user.id}
                                                 videoId={video.id}
+                                                otherCommunity={video.communityId !== communityCtx.community}
                                             />
                                         )
                                     })}

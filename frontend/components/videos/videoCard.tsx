@@ -3,7 +3,7 @@ import VidoeStarRating from './videoStarRating';
 import VidoeTimeing from './videoTimeing';
 import Link from 'next/link';
 import { API_URL } from '@/config/api';
-import { IconSparkles } from '@tabler/icons-react';
+import { IconAB2, IconSparkles } from '@tabler/icons-react';
 
 const useStyles = createStyles((theme) => ({
     card: {
@@ -46,6 +46,7 @@ interface VidoeCardProps {
     product?: boolean;
     minimal?: boolean;
     tags?: string;
+    otherCommunity?: boolean;
 }
 
 const VidoeCard: React.FC<VidoeCardProps> = props => {
@@ -92,6 +93,11 @@ const VidoeCard: React.FC<VidoeCardProps> = props => {
                 <Group>
                     <VidoeStarRating rating='2.3' />
                     {/* <VidoeTimeing timeing='2h' /> */}
+                    {props.otherCommunity ? (
+                        <Tooltip label="This video is from other community">
+                            <IconAB2 size={16} color={theme.colors.violet[5]} />
+                        </Tooltip>
+                    ) : null}
                 </Group>
                 <div style={{ flex: 1 }}></div>
                 {props.cost > 0 ? (
@@ -108,7 +114,8 @@ const VidoeCard: React.FC<VidoeCardProps> = props => {
 
 VidoeCard.defaultProps = {
     product: false,
-    minimal: false
+    minimal: false,
+    otherCommunity: false
 };
 
 export default VidoeCard;

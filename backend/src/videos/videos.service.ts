@@ -21,7 +21,7 @@ export class VideosService {
 
     public getHomeFeed(communityId: string) {
         return this.videosRepository.findAll({
-            attributes: ['id', 'title', 'thumbnail', 'cost', 'watchTime'],
+            attributes: ['id', 'title', 'thumbnail', 'cost', 'watchTime', 'communityId'],
             include: [{
                 attributes: ['id', 'username'],
                 model: User,
