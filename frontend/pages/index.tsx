@@ -12,6 +12,7 @@ import HomeNav from '@/components/home/homeNav';
 import HomePrice from '@/components/home/homePrice';
 import MockLoading from '@/components/ui/mockLoading';
 import communityContext from '@/context/community';
+import { t } from 'i18next';
 
 const Homepage: React.FC<{}> = () => {
     const authCtx = useContext(authContext);
@@ -41,11 +42,11 @@ const Homepage: React.FC<{}> = () => {
                     </Grid.Col>
                     <Grid.Col span={8}>
                         <Box>
-                            <h2>Local talks</h2>
+                            <h2>{t('localTalks')}</h2>
                             <MockLoading>
                                 <LocalTalks />
                             </MockLoading>
-                            <h1>Videos  </h1>
+                            <h2>{t('videos')}</h2>
                             <MockLoading>
                                 <SimpleGrid cols={3}>
                                     {data.map(video => {
@@ -70,7 +71,7 @@ const Homepage: React.FC<{}> = () => {
                         <HomePrice
                             data={[
                                 {
-                                    label: 'Price',
+                                    label: t('price'),
                                     stats: '0.000006124 ETH',
                                     progress: 100,
                                     color: 'green',

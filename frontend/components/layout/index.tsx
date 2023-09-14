@@ -159,12 +159,12 @@ const Layout: React.FC<ILayoutProps> = props => {
                     <Group position='apart'>
                         <div className={classes.logo}>
                             <img className={classes.logoIcon} src='/images/Kapa-logo-big.png' alt='Kapa' />
-                            <span className={classes.logoText}>Kapa</span>
+                            <span className={classes.logoText}>{t('kapa')}</span>
                         </div>
                         <Burger opened={opened} onClick={toggle} className={classes.burger} size='sm' />
                         <Autocomplete
                             className={classes.search}
-                            placeholder="Search videos, people"
+                            placeholder={t('searchVideos')}
                             icon={<IconSearch size="1rem" stroke={1.5} />}
                             data={[]}
                         />
@@ -211,33 +211,35 @@ const Layout: React.FC<ILayoutProps> = props => {
                                     <Menu.Item
                                         icon={<IconHeart size='0.9rem' color={theme.colors.red[6]} stroke={1.5} />}
                                     >
-                                        Liked posts
+                                        {t('likedPost')}
                                     </Menu.Item>
                                     <Menu.Item
                                         icon={<IconStar size='0.9rem' color={theme.colors.yellow[6]} stroke={1.5} />}
                                     >
-                                        Saved posts
+                                        {t('savedPost')}
                                     </Menu.Item>
                                     <Menu.Item
                                         icon={<IconMessage size='0.9rem' color={theme.colors.blue[6]} stroke={1.5} />}
                                     >
-                                        Your comments
+                                        {t('yourComments')}
                                     </Menu.Item>
 
-                                    <Menu.Label>Settings</Menu.Label>
+                                    <Menu.Label>{t('settings')}</Menu.Label>
                                     <Link href='/settings' passHref style={{ textDecoration: 'none' }}>
                                         <Menu.Item
                                             icon={<IconSettings size='0.9rem' stroke={1.5} />}
                                         >
-                                            Settings
+                                            {t('settings')}
                                         </Menu.Item>
                                     </Link>
                                     <Link href='/profile' passHref style={{ textDecoration: 'none' }}>
                                         <Menu.Item component='a' icon={<IconUser size='0.9rem' stroke={1.5} />}>
-                                            My profile
+                                            {t('myProfile')}
                                         </Menu.Item>
                                     </Link>
-                                    <Menu.Item onClick={logoutHandler} color='red' icon={<IconLogout size='0.9rem' stroke={1.5} />}>Logout</Menu.Item>
+                                    <Menu.Item onClick={logoutHandler} color='red' icon={<IconLogout size='0.9rem' stroke={1.5} />}>
+                                        {t('logout')}
+                                    </Menu.Item>
                                 </Menu.Dropdown>
                             </Menu>
                         </Group>
