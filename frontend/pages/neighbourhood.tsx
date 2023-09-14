@@ -12,8 +12,16 @@ const NeighbourhoodPage: React.FC = () => {
                         <ChatItem
                             avatar="https://avatars.githubusercontent.com/u/80540635?v=4"
                             alt="kursat_avatar"
-                            title="Kursat"
-                            subtitle="Ok. See you !"
+                            title="Vinod"
+                            subtitle="Iru machan! Varen"
+                            date={new Date()}
+                            unread={0}
+                        />
+                        <ChatItem
+                            avatar="https://avatars.githubusercontent.com/u/80540635?v=4"
+                            alt="kursat_avatar"
+                            title="Rahul"
+                            subtitle="Cool bruh :)"
                             date={new Date()}
                             unread={0}
                         />
@@ -21,15 +29,7 @@ const NeighbourhoodPage: React.FC = () => {
                             avatar="https://avatars.githubusercontent.com/u/80540635?v=4"
                             alt="kursat_avatar"
                             title="Kursat"
-                            subtitle="Ok. See you !"
-                            date={new Date()}
-                            unread={0}
-                        />
-                        <ChatItem
-                            avatar="https://avatars.githubusercontent.com/u/80540635?v=4"
-                            alt="kursat_avatar"
-                            title="Kursat"
-                            subtitle="Ok. See you !"
+                            subtitle="I'll be there in 10 mins"
                             date={new Date()}
                             unread={0}
                         />
@@ -44,14 +44,14 @@ const NeighbourhoodPage: React.FC = () => {
                                 {
                                     position: 'left',
                                     type: 'text',
-                                    title: 'Kursat',
-                                    text: 'Give me a message list example !',
+                                    title: 'Vinod',
+                                    text: 'Amma making ulundhu vadai ;) !',
                                 },
                                 {
                                     position: 'right',
                                     type: 'text',
                                     title: 'Emre',
-                                    text: 'Thats all.',
+                                    text: 'Enakku? :(',
                                 },
                             ]}
                         />
