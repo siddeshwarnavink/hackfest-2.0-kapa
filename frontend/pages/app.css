@@ -54,7 +54,7 @@ body {
   /* Adjust the map container height to accommodate the label */
   #map {
     width: 100%;
-    height: 450px; /* Increase the height to accommodate the label */
+    height: 85.5vh; /* Increase the height to accommodate the label */
     border: 1px solid #ccc;
     position: relative; /* Add this line for proper positioning */
   }
@@ -70,4 +70,3 @@ body {
     border-radius: 5px;
     border: 1px solid #ccc;
   }
-  

@@ -61,23 +61,23 @@ function Map() {
 
     const locationName = new LocationMarker("SRM Vadapalani", [13.0501, 80.2110], map);
     const locationName2 = new LocationMarker("Koyambedu", [13.09, 80.0], map);
-    const loc3 = new LocationMarker("Bay Of Bengal", [13.01, 80.5], map);
+    // const loc3 = new LocationMarker("Bay Of Bengal", [13.01, 80.5], map);
 
     locationName.createMarker();
     locationName2.createMarker();
-    loc3.createMarker();
+    // loc3.createMarker();
 
     // Cleanup when the component unmounts
     return () => {
       map.remove(); // Remove the map when the component unmounts
-      loc3.removeMarker();
+      // loc3.removeMarker();
       locationName.removeMarker();
       locationName2.removeMarker();
     };
   }, []);
 
   return (
-    <div id="map" className="map-container"></div>
+  <div id="map" className="map-container"></div>
   );
 }
 
