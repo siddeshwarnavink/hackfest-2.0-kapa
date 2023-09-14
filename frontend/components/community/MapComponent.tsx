@@ -29,7 +29,7 @@ function SwitchCommunityButton(props: { name: string }) {
         id={`switch-${props.name.replace(' ', '-')}`}
         onClick={() => switchCommunity(props.name === 'SRM Vadapalani' ? { id: 'dffc1370-5247-11ee-ac55-ac1203516bd9', name: 'SRM Vadapalani' } : { id: 'dffc0b77-5247-11ee-ac55-ac1203516bd9', name: 'Koyambedu' })}
       >
-        Switch
+        Join community
       </Button>
     </div>
   );
