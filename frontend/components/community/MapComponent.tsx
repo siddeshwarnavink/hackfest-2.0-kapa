@@ -112,7 +112,7 @@ function Map() {
       locationName5.removeMarker();
       locationName6.removeMarker();
       locationName7.removeMarker();
-      locationName8.createMarker();
+      locationName8.removeMarker();
     };
   }, []);
 
