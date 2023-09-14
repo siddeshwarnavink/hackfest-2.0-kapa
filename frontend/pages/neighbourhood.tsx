@@ -51,7 +51,7 @@ const NeighbourhoodPage: React.FC = () => {
                                     position: 'right',
                                     type: 'text',
                                     title: 'Emre',
-                                    text: 'Enakku? :(',
+                                    text: 'Iru machan! Varen',
                                 },
                             ]}
                         />
