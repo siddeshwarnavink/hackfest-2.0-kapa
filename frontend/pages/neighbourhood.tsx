@@ -10,7 +10,7 @@ const NeighbourhoodPage: React.FC = () => {
                 <Grid mt='md'>
                     <Grid.Col span={4}>
                         <ChatItem
-                            avatar="https://avatars.githubusercontent.com/u/80540635?v=4"
+                            avatar="/images/profile-picture.png"
                             alt="kursat_avatar"
                             title="Vinod"
                             subtitle="Iru machan! Varen"
@@ -18,7 +18,7 @@ const NeighbourhoodPage: React.FC = () => {
                             unread={0}
                         />
                         <ChatItem
-                            avatar="https://avatars.githubusercontent.com/u/80540635?v=4"
+                            avatar="/images/profile-picture.png"
                             alt="kursat_avatar"
                             title="Rahul"
                             subtitle="Cool bruh :)"
@@ -26,7 +26,7 @@ const NeighbourhoodPage: React.FC = () => {
                             unread={0}
                         />
                         <ChatItem
-                            avatar="https://avatars.githubusercontent.com/u/80540635?v=4"
+                            avatar="/images/profile-picture.png"
                             alt="kursat_avatar"
                             title="Kursat"
                             subtitle="I'll be there in 10 mins"
